@@ -8,7 +8,7 @@ body {
   position: relative;
 }
 
-/* Fondo de estrellas inmersivo */
+/* Fondo de estrellas */
 .starfield, .stars {
   position: absolute;
   top: 0;
@@ -30,24 +30,13 @@ body {
   background-repeat: repeat;
   background-size: 200px 200px;
   animation: zoom 60s linear infinite;
-  opacity: 0;
+  opacity: 0.6;
 }
 
 @keyframes zoom {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-    animation-timing-function: ease-in;
-  }
-  85% {
-    opacity: 1;
-    transform: scale(2.5);
-    animation-timing-function: linear;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(3.5);
-  }
+  0% { opacity: 0; transform: scale(0.5); }
+  85% { opacity: 1; transform: scale(2.5); }
+  100% { opacity: 0; transform: scale(3.5); }
 }
 
 /* Encabezado */
@@ -57,9 +46,8 @@ body {
   left: 20px;
   z-index: 10;
   display: flex;
-  flex-direction: row;
-  align-items: center;
   gap: 20px;
+  align-items: center;
 }
 
 .logo-block {
@@ -88,41 +76,46 @@ body {
   max-width: 200px;
 }
 
-/* Escena */
+/* Escena principal */
 .scene {
   position: relative;
   width: 100vw;
   height: 100vh;
-  transition: transform 4s ease;
 }
 
-/* Contenedor de tierra + texto */
+/* Contenedor central */
 .earth-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-/* Planeta con texto centrado */
-.earth-text {
-  position: relative;
-  width: 200px;
-  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
   z-index: 2;
 }
 
-.earth {
+/* Canvas 3D */
+#earth3d {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  z-index: 1;
+}
+
+#earth3d canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  pointer-events: none;
   display: block;
   z-index: 1;
 }
 
+/* Texto "Re" */
 .re {
   position: absolute;
   top: 50%;
@@ -134,18 +127,34 @@ body {
   z-index: 3;
   pointer-events: auto;
   cursor: pointer;
-  transition: opacity 0.5s ease;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 1.5s ease;
+  animation: rePulse 2.5s infinite ease-in-out;
 }
 
-/* Texto complementario */
+.flipped {
+  transform: translate(-50%, -50%) scaleX(-1);
+}
+
+/* Texto adicional */
 .mainder {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 10px);
+  transform: translateY(-50%);
   font-size: 1.5rem;
   color: #f0ead6;
   z-index: 3;
-  transition: opacity 0.5s ease;
+  opacity: 1;
+  transition: left 0.6s ease, opacity 0.4s ease;
 }
 
-/* Footer */
+.left-side {
+  left: -200px;
+  right: auto;
+}
+
+/* Pie de página */
 footer {
   position: absolute;
   bottom: 10px;
@@ -156,11 +165,7 @@ footer {
   color: #f0ead6;
 }
 
-/* Reflejo e inversión */
-.scene.inverted .earth-wrapper {
-  flex-direction: row-reverse;
-}
-
-.scene.inverted .earth-text {
-  transform: rotateY(180deg);
+@keyframes rePulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.06); }
 }
