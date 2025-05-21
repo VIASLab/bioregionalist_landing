@@ -6,15 +6,23 @@
   <title>Bioregionalist</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Estilo base para el canvas */
+    #starCanvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      display: block;
+      background-color: #001933;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Fondo estrellado -->
-  <div class="starfield">
-    <div class="stars"></div>
-    <div class="stars"></div>
-    <div class="stars"></div>
-  </div>
+  <!-- Canvas animado para estrellas -->
+  <canvas id="starCanvas"></canvas>
 
   <!-- Encabezado -->
   <header class="header">
@@ -40,11 +48,60 @@
   </footer>
 
   <!-- Scripts (en orden correcto) -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-  <!-- CORRECTO -->
+ <!-- Scripts (en orden correcto) -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 <script type="module" src="assets/js/earth3d.js"></script>
+<script src="assets/js/script.js"></script>
 
-  <script src="assets/js/script.js"></script>
+<!-- Script para animación de estrellas -->
+<script type="module">
+  import { initStarfield } from './assets/js/canvasStarfield.js';
+
+  const canvas = document.getElementById('starCanvas');
+  const starfield = initStarfield(canvas);
+
+  const wrapper = document.querySelector('.earth-wrapper');
+  const reText = document.getElementById("reText");
+  const mainderText = document.getElementById("mainderText");
+
+  // Estado inicial
+  starfield.setSpeed(0.001); // derecha, lento
+
+  wrapper.addEventListener("mouseenter", () => {
+    starfield.setSpeed(-0.02); // gira rápido a la izquierda
+
+    reText.classList.add("flipped");
+    mainderText.classList.add("left-side");
+
+    reText.style.opacity = "0";
+    mainderText.style.opacity = "0";
+
+    setTimeout(() => {
+      reText.textContent = "eR";
+      mainderText.textContent = "noitulov";
+      reText.style.opacity = "1";
+      mainderText.style.opacity = "1";
+    }, 300);
+  });
+
+  wrapper.addEventListener("mouseleave", () => {
+    starfield.setSpeed(0.001); // vuelve a derecha lento
+
+    reText.classList.remove("flipped");
+    mainderText.classList.remove("left-side");
+
+    reText.style.opacity = "0";
+    mainderText.style.opacity = "0";
+
+    setTimeout(() => {
+      reText.textContent = "Re";
+      mainderText.innerHTML = "generative<br>volution";
+      reText.style.opacity = "1";
+      mainderText.style.opacity = "1";
+    }, 300);
+  });
+</script>
+
 
 </body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+
+    .stars {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('assets/images/starfield.jpg');
+      background-size: cover;
+      background-position: center;
+      animation: rotate 30s linear infinite;
+      transform-origin: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+</body>
+</html>
