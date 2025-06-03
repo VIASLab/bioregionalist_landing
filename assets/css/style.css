@@ -1,14 +1,36 @@
-/* Estilo general */
+/* ============================= */
+/*  CSS Completo para Bioregionalist */
+/*  Web sustentable y amigable con el medio ambiente */
+/* ============================= */
+
+/* 1) Variables globales */
+:root {
+  --size-re: 7rem;       /* Tamaño para “Re” y “generative volution” */
+  --logo-width: 300px;   /* Ancho del logo SVG en el header */
+  --font-primary: 'Inter', sans-serif;  /* Tipografía principal */
+  --color-text: #f0ead6;
+  --color-background: #001933;
+  --color-highlight: orange; /* Color para “Re” */
+}
+
+/* ============================= */
+/* 2) Estilo general y fondo */
+/* ============================= */
+
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  color: #f0ead6;
-  background-color: #001933;
+  padding: 0;
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  background-color: var(--color-background);
   overflow: hidden;
   position: relative;
 }
 
-/* Fondo de estrellas */
+/* ********************** */
+/* Fondo de estrellas      */
+/* ********************** */
+
 .starfield {
   position: absolute;
   top: 0;
@@ -20,7 +42,7 @@ body {
   pointer-events: none;
 }
 
-/* Estrellas base */
+/* Estrellas base (tres capas) */
 .stars {
   position: absolute;
   top: 0;
@@ -70,23 +92,30 @@ body {
   animation: starvortex3 6s linear infinite;
 }
 
-/* Animaciones */
+/* Animaciones de cada capa */
 @keyframes starvortex1 {
   0% { background-position: 0% 0%; }
   100% { background-position: -100% 100%; }
 }
-
 @keyframes starvortex2 {
   0% { background-position: 0% 0%; }
   100% { background-position: -150% 150%; }
 }
-
 @keyframes starvortex3 {
   0% { background-position: 0% 0%; }
   100% { background-position: -200% 200%; }
 }
 
-/* Encabezado */
+/* Modo “slow” (muy lento) para el fondo de estrellas */
+.starfield.slow .stars {
+  animation: starvortex1 40s linear infinite;
+  opacity: 0.4;
+}
+
+/* ============================= */
+/* 3) Encabezado (Header)       */
+/* ============================= */
+
 .header {
   position: absolute;
   top: 20px;
@@ -97,40 +126,49 @@ body {
   align-items: center;
 }
 
+/* Bloque de logo e información */
 .logo-block {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Imagen del logo SVG */
 .logo {
-  width: 90px;
+  width: var(--logo-width);  /* Aumentado para que el texto SVG sea legible */
   height: auto;
+  display: block;
 }
 
+/* Texto alternativo si usas <span class="brand">Bioregionalist</span> en lugar de imagen */
 .brand {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #f0ead6;
+  color: var(--color-text);
   text-shadow: 1px 1px 2px #000;
   text-align: center;
 }
 
+/* Tagline si la activas (<h1 class="tagline">...) */
 .tagline {
   font-size: 1rem;
-  color: #f0ead6;
+  color: var(--color-text);
   text-shadow: 1px 1px 2px #000;
   max-width: 200px;
+  text-align: center;
 }
 
-/* Escena principal */
+/* ============================= */
+/* 4) Escena principal (Three.js + textos) */
+/* ============================= */
+
 .scene {
   position: relative;
   width: 100vw;
   height: 100vh;
 }
 
-/* Contenedor central */
+/* Contenedor central del planeta y textos */
 .earth-wrapper {
   position: absolute;
   top: 50%;
@@ -143,9 +181,9 @@ body {
   z-index: 2;
 }
 
-/* Canvas 3D */
+/* Contenedor del canvas 3D */
 #earth3d {
-  width: 200px;
+  width: 200px;    /* Tamaño del globo */
   height: 200px;
   position: relative;
   z-index: 1;
@@ -162,15 +200,18 @@ body {
   z-index: 1;
 }
 
-/* Texto "Re" */
+/* ============================= */
+/* 5) Texto “Re” superpuesto     */
+/* ============================= */
+
 .re {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 7rem;
+  font-size: var(--size-re);  /* Variable: igual que el hover-text */
   font-weight: 700;
-  color: orange;
+  color: var(--color-highlight);  /* e.g., naranja */
   z-index: 3;
   pointer-events: auto;
   cursor: pointer;
@@ -179,29 +220,51 @@ body {
   animation: rePulse 2.5s infinite ease-in-out;
 }
 
+/* Clase para volteo horizontal en hover */
 .flipped {
   transform: translate(-50%, -50%) scaleX(-1);
 }
 
-/* Texto adicional */
+/* ============================= */
+/* 6) Texto adicional (hover-text) */
+/* ============================= */
+
 .mainder {
   position: absolute;
   top: 50%;
-  left: calc(100% + 10px);
+  left: calc(100% + 50px);
   transform: translateY(-50%);
-  font-size: 1.5rem;
-  color: #f0ead6;
+  font-size: var(--size-re);  /* Igual tamaño que .re */
+  font-weight: 400;
+  color: var(--color-text);
   z-index: 3;
   opacity: 1;
   transition: left 0.6s ease, opacity 0.4s ease;
 }
 
+/* Clase para mover el texto al otro lado (left-side) */
 .left-side {
-  left: -200px;
+  left: -480px;
   right: auto;
 }
 
-/* Pie de página */
+/* ============================= */
+/* 7) Animación para “Re”        */
+/* ============================= */
+
+@keyframes rePulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+}
+
+/* ============================= */
+/* 8) Pie de página (Footer)      */
+/* ============================= */
+
 footer {
   position: absolute;
   bottom: 10px;
@@ -209,15 +272,30 @@ footer {
   text-align: center;
   font-family: monospace;
   font-size: 0.9rem;
-  color: #f0ead6;
+  color: var(--color-text);
 }
 
-/* Animación texto */
-@keyframes rePulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.06); }
+/* ============================= */
+/* 9) Estilos adicionales opcionales */
+/* ============================= */
+
+/* Si quieres desactivar el overflow en móviles muy pequeños */
+@media (max-width: 600px) {
+  body {
+    overflow: auto;
+  }
+  /* Reducir el tamaño del planeta en móviles */
+  #earth3d {
+    width: 150px;
+    height: 150px;
+  }
+  /* Reducir el tamaño de “Re” y el hover-text */
+  :root {
+    --size-re: 5rem;
+    --logo-width: 200px;
+  }
 }
-.starfield.slow .stars {
-  animation: starvortex1 40s linear infinite; /* mucho más lento */
-  opacity: 0.4;
-}
+
+/* ============================= */
+/* Fin del CSS                   */
+/* ============================= */
