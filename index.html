@@ -2,106 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bioregionalist</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* Estilo base para el canvas */
     #starCanvas {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      display: block;
-      background-color: #001933;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: -2; display: block;
     }
   </style>
 </head>
 <body>
-
-  <!-- Canvas animado para estrellas -->
   <canvas id="starCanvas"></canvas>
+  <div class="starfield" id="cssStarfield">
+    <div class="stars stars-layer1"></div>
+    <div class="stars stars-layer2"></div>
+    <div class="stars stars-layer3"></div>
+  </div>
 
-  <!-- Encabezado -->
   <header class="header">
     <div class="logo-block">
       <img src="assets/images/logo.svg" alt="Bioregionalist logo" class="logo" />
-     <!-- <span class="brand">Bioregionalist</span>-->
     </div>
-    <!--<h1 class="tagline">Local Resilience / Global Wisdom</h1> -->
   </header>
 
-  <!-- Contenido principal -->
   <main class="scene">
+    <div id="mainInteractionZone"></div>
     <div class="earth-wrapper">
+
       <div id="earth3d"></div>
-      <span class="re" id="reText">Re</span>
-      <span class="mainder" id="mainderText">generative<br>volution</span>
+
+      <div id="reContainer">
+        <div class="flip-container letter-flipper" id="rFlipper">
+          <div class="flipper">
+            <div class="front face re-text">R</div>
+            <div class="back face re-text mirrored-text">R</div>
+          </div>
+        </div>
+        <div class="flip-container letter-flipper" id="eFlipper">
+          <div class="flipper">
+            <div class="front face re-text">e</div>
+            <div class="back face re-text mirrored-text">e</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-group" id="textGroupRight">
+        <span class="gen-text">generative</span>
+        <div id="volution" class="volve-text">
+          <span class="letter">v</span>
+          <span class="letter">o</span>
+          <span class="letter">l</span>
+          <span class="letter">u</span>
+          <span class="letter">t</span>
+          <span class="letter">i</span>
+          <span class="letter">o</span>
+          <span class="letter">n</span>
+        </div>
+      </div>
+
     </div>
   </main>
 
-  <!-- Pie de página -->
-  <footer>
-   <!--<p>Local Resilience</p>--> 
+  <footer class="site-footer">
+   <!-- <p id="footerText">Local Resilience / Global Wisdom</p>-->
   </footer>
 
-  <!-- Scripts (en orden correcto) -->
- <!-- Scripts (en orden correcto) -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-<script type="module" src="assets/js/earth3d.js"></script>
-<script src="assets/js/script.js"></script>
-
-<!-- Script para animación de estrellas -->
-<script type="module">
-  import { initStarfield } from './assets/js/canvasStarfield.js';
-
-  const canvas = document.getElementById('starCanvas');
-  const starfield = initStarfield(canvas);
-
-  const wrapper = document.querySelector('.earth-wrapper');
-  const reText = document.getElementById("reText");
-  const mainderText = document.getElementById("mainderText");
-
-  // Estado inicial
-  starfield.setSpeed(0.001); // derecha, lento
-
-  wrapper.addEventListener("mouseenter", () => {
-    starfield.setSpeed(-0.02); // gira rápido a la izquierda
-
-    reText.classList.add("flipped");
-    mainderText.classList.add("left-side");
-
-    reText.style.opacity = "0";
-    mainderText.style.opacity = "0";
-
-    setTimeout(() => {
-      reText.textContent = "eR";
-      mainderText.textContent = "noitulov";
-      reText.style.opacity = "1";
-      mainderText.style.opacity = "1";
-    }, 300);
-  });
-
-  wrapper.addEventListener("mouseleave", () => {
-    starfield.setSpeed(0.001); // vuelve a derecha lento
-
-    reText.classList.remove("flipped");
-    mainderText.classList.remove("left-side");
-
-    reText.style.opacity = "0";
-    mainderText.style.opacity = "0";
-
-    setTimeout(() => {
-      reText.textContent = "Re";
-      mainderText.innerHTML = "generative<br>volution";
-      reText.style.opacity = "1";
-      mainderText.style.opacity = "1";
-    }, 300);
-  });
-</script>
-
-
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <script type="module" src="assets/js/earth3d.js"></script>
+  <script type="module" src="assets/js/script.js"></script>
 </body>
 </html>

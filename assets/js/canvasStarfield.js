@@ -1,5 +1,5 @@
-
 // assets/js/canvasStarfield.js
+
 export function initStarfield(canvas, options = {}) {
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth;

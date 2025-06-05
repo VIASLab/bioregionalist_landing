@@ -1,45 +1,72 @@
+import { initStarfield } from './canvasStarfield.js';
+
 document.addEventListener("DOMContentLoaded", () => {
-  const reText = document.getElementById("reText");
-  const mainderText = document.getElementById("mainderText");
-  const wrapper = document.querySelector(".earth-wrapper");
+  const canvas = document.getElementById('starCanvas');
+  const cssStarfield = document.getElementById('cssStarfield');
+  const mainInteractionZone = document.getElementById('mainInteractionZone');
+  const rFlipper = document.getElementById('rFlipper');
+  const eFlipper = document.getElementById('eFlipper');
+  const textGroupRight = document.getElementById('textGroupRight');
+  const earth3dElement = document.getElementById('earth3d');
+  const siteFooter = document.querySelector('.site-footer');
+  const volution = document.getElementById('volution');
+  const reContainer = document.getElementById('reContainer');
 
-  // Control desde el módulo externo
-  import('./assets/js/canvasStarfield.js').then(({ initStarfield }) => {
-    const canvas = document.getElementById("starCanvas");
-    const starfield = initStarfield(canvas);
+  if (
+    !canvas || !cssStarfield || !mainInteractionZone ||
+    !rFlipper || !eFlipper ||
+    !textGroupRight || !earth3dElement || !volution || !reContainer
+  ) {
+    console.error("Error: Elementos clave no encontrados. Revisa IDs.");
+    return;
+  }
 
-    wrapper.addEventListener("mouseenter", () => {
-      starfield.setSpeed(-0.02); // gira rápido a la izquierda
+  let starfieldInstance = initStarfield(canvas);
+  starfieldInstance?.setSpeed?.(0.0005);
 
-      reText.classList.add("flipped");
-      mainderText.classList.add("left-side");
+  let isActiveState = false;
 
-      reText.style.opacity = "0";
-      mainderText.style.opacity = "0";
+  const activateScene = () => {
+    if (isActiveState) return;
+    isActiveState = true;
 
-      setTimeout(() => {
-        reText.textContent = "eR";
-        mainderText.textContent = "noitulov";
-        reText.style.opacity = "1";
-        mainderText.style.opacity = "1";
-      }, 300);
-    });
+    starfieldInstance?.setSpeed(-0.015);
+    cssStarfield.classList.add('is-active');
+    canvas.classList.add('active');
 
-    wrapper.addEventListener("mouseleave", () => {
-      starfield.setSpeed(0.001); // gira lento a la derecha
+    rFlipper.classList.add('is-flipped');
+    eFlipper.classList.add('is-flipped');
 
-      reText.classList.remove("flipped");
-      mainderText.classList.remove("left-side");
+    textGroupRight.classList.add('gen-hidden');
+    volution.classList.add('to-left');
+    reContainer.classList.add('reverse-order');
 
-      reText.style.opacity = "0";
-      mainderText.style.opacity = "0";
+    earth3dElement.classList.add('is-pulsing');
+    siteFooter.classList.add('is-hidden');
+  };
 
-      setTimeout(() => {
-        reText.textContent = "Re";
-        mainderText.innerHTML = "generative<br>volution";
-        reText.style.opacity = "1";
-        mainderText.style.opacity = "1";
-      }, 300);
-    });
+  const deactivateScene = () => {
+    if (!isActiveState) return;
+    isActiveState = false;
+
+    starfieldInstance?.setSpeed(0.0005);
+    cssStarfield.classList.remove('is-active');
+    canvas.classList.remove('active');
+
+    rFlipper.classList.remove('is-flipped');
+    eFlipper.classList.remove('is-flipped');
+
+    textGroupRight.classList.remove('gen-hidden');
+    volution.classList.remove('to-left');
+    reContainer.classList.remove('reverse-order');
+
+    earth3dElement.classList.remove('is-pulsing');
+    siteFooter.classList.remove('is-hidden');
+  };
+
+  const elementsToTrigger = [mainInteractionZone, reContainer];
+  elementsToTrigger.forEach(el => {
+    el.addEventListener('mouseenter', activateScene);
+    el.addEventListener('mouseleave', deactivateScene);
   });
 });
