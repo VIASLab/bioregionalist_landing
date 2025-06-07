@@ -6,12 +6,6 @@
   <title>Bioregionalist</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    #starCanvas {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      z-index: -2; display: block;
-    }
-  </style>
 </head>
 <body>
   <canvas id="starCanvas"></canvas>
@@ -21,16 +15,28 @@
     <div class="stars stars-layer3"></div>
   </div>
 
-  <header class="header">
-    <div class="logo-block">
-      <img src="assets/images/logo.svg" alt="Bioregionalist logo" class="logo" />
+<header class="header">
+  <div class="logo-block">
+    <img src="assets/images/logo.svg" alt="Bioregionalist Isotipo" class="logo" />
+    <div class="logo-texts">
+      <span class="logo-title">Bioregionalist</span>
+      <span class="logo-subtitle">
+        <span class="text-beige">Local resilience</span><span class="text-separator">|</span><span class="text-beige">Global wisdom</span>
+      </span>
     </div>
-  </header>
+  </div>
+  <div class="newsletter-cta">
+    <svg class="paper-plane" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="10,50 90,50 50,10" fill="#f0ead6"/>
+    </svg>
+  </div>
+</header>
+
+
 
   <main class="scene">
     <div id="mainInteractionZone"></div>
     <div class="earth-wrapper">
-
       <div id="earth3d"></div>
 
       <div id="reContainer">
@@ -61,13 +67,41 @@
           <span class="letter">n</span>
         </div>
       </div>
-
     </div>
   </main>
 
-  <footer class="site-footer">
-   <!-- <p id="footerText">Local Resilience / Global Wisdom</p>-->
-  </footer>
+   <footer class="site-footer">
+  <div class="footer-left">
+    Objective Subjective Transjective musings on regenerative systems
+  </div>
+  <div class="footer-right">
+    <div class="rotating-words">
+      <span>Agriculture</span>
+      <span>Economy</span>
+      <span>Development</span>
+      <span>Design</span>
+      <span>Energy</span>
+      <span>Arts</span>
+      <span>Culture</span>
+      <span>Architecture</span>
+      <span>Tourism</span>
+      <span>Leadership</span>
+      <span>Healing</span>
+      <span>Education</span>
+      <span>Forestry</span>
+      <span>Landscapes</span>
+      <span>Cities</span>
+      <span>Finance</span>
+      <span>Business</span>
+      <span>Health</span>
+      <span>Justice</span>
+      <span>Tech</span>
+      <span>Governance</span>
+      <span>Storytelling</span>
+    </div>
+  </div>
+</footer>
+
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <script type="module" src="assets/js/earth3d.js"></script>
