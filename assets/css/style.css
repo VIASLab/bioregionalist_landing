@@ -4,7 +4,7 @@
 
 :root {
   --size-re-main: 6rem;
-  --logo-width: 250px;
+  --logo-width: 120px;
   --font-primary: 'Inter', sans-serif;
   --color-text: #f0ead6;
   --color-background: #001224;
@@ -303,10 +303,79 @@ body {
   opacity: 0;
 }
 
+/* Logo en el header */
+.logo-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  width: clamp(64px, 8vw, 120px);
+  height: auto;
+}
+
+.logo-texts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.logo-title {
+  font-size: clamp(1.4rem, 2vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text);
+}
+
+.logo-subtitle {
+  font-size: clamp(0.7rem, 1.1vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  opacity: 0.85;
+  margin-top: 0.2em;
+  display: flex;
+  gap: 0.25em;
+}
+
+.text-separator {
+  color: #6a7b3a; /* verde armónico */
+}
+
+
+
+
+/* Colores específicos */
+.text-beige {
+  color: #f0ead6;
+}
+
+.text-green {
+  color: #768c5d;
+}
+
+
+
 @media (max-width: 768px) {
   /* Responsivo aquí */
 }
 
 @media (max-width: 480px) {
-  /* Responsivo aquí */
+  .logo-block {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .logo-texts {
+    align-items: center;
+    text-align: center;
+  }
+
+  .logo-subtitle {
+    font-size: 0.75rem;
+  }
 }
