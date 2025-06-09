@@ -9,7 +9,8 @@ export function initStarfield(canvas, options = {}) {
 
   const numStars = options.numStars || 250;
   const radiusMin = 50;
-  const radiusMax = Math.sqrt(width * width + height * height) / 2;
+  /*const radiusMax = Math.sqrt(width * width + height * height) / 2;*/
+  let radiusMax = Math.sqrt(width * width + height * height) / 2;
   const stars = [];
 
   for (let i = 0; i < numStars; i++) {
@@ -22,8 +23,19 @@ export function initStarfield(canvas, options = {}) {
   let currentSpeed = targetSpeed;
 
   function resizeCanvas() {
-    canvas.width = window.innerWidth;
+/* new line using codex */
+     const oldRadiusMax = radiusMax;
+   /*end */
+     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+  /*codex second part */
+    width = canvas.width;
+    height = canvas.height;
+    radiusMax = Math.sqrt(width * width + height * height) / 2;
+    const radiusScale = radiusMax / oldRadiusMax;
+    for (let star of stars) {
+      star.radius = Math.min(radiusMax, star.radius * radiusScale);
+    }
   }
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);

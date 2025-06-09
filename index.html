@@ -4,9 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bioregionalist</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Estilos -->
   <link rel="stylesheet" href="assets/css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/footer-words.css" />
 </head>
+
 <body>
   <canvas id="starCanvas"></canvas>
   <div class="starfield" id="cssStarfield">
@@ -15,24 +26,32 @@
     <div class="stars stars-layer3"></div>
   </div>
 
-<header class="header">
-  <div class="logo-block">
-    <img src="assets/images/logo.svg" alt="Bioregionalist Isotipo" class="logo" />
-    <div class="logo-texts">
-      <span class="logo-title">Bioregionalist</span>
-      <span class="logo-subtitle">
-        <span class="text-beige">Local resilience</span><span class="text-separator">|</span><span class="text-beige">Global wisdom</span>
-      </span>
+  <header class="header">
+    <div class="logo-block">
+      <img
+        src="assets/images/logo.svg"
+        alt="Bioregionalist Isotipo"
+        class="logo"
+      />
+      <div class="logo-texts">
+        <span class="logo-title">Bioregionalist</span>
+        <span class="logo-subtitle">
+          <span class="text-beige">Local resilience</span
+          ><span class="text-separator">|</span
+          ><span class="text-beige">Global wisdom</span>
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="newsletter-cta">
-    <svg class="paper-plane" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="10,50 90,50 50,10" fill="#f0ead6"/>
-    </svg>
-  </div>
-</header>
-
-
+    <div class="newsletter-cta">
+      <svg
+        class="paper-plane"
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polygon points="10,50 90,50 50,10" fill="#f0ead6" />
+      </svg>
+    </div>
+  </header>
 
   <main class="scene">
     <div id="mainInteractionZone"></div>
@@ -70,39 +89,47 @@
     </div>
   </main>
 
-   <footer class="site-footer">
-  <div class="footer-left">
-    Objective Subjective Transjective musings on regenerative systems
-  </div>
-  <div class="footer-right">
-    <div class="rotating-words">
-      <span>Agriculture</span>
-      <span>Economy</span>
-      <span>Development</span>
-      <span>Design</span>
-      <span>Energy</span>
-      <span>Arts</span>
-      <span>Culture</span>
-      <span>Architecture</span>
-      <span>Tourism</span>
-      <span>Leadership</span>
-      <span>Healing</span>
-      <span>Education</span>
-      <span>Forestry</span>
-      <span>Landscapes</span>
-      <span>Cities</span>
-      <span>Finance</span>
-      <span>Business</span>
-      <span>Health</span>
-      <span>Justice</span>
-      <span>Tech</span>
-      <span>Governance</span>
-      <span>Storytelling</span>
+  <footer class="site-footer">
+    <div class="footer-left">
+      <span class="crossed">Objective / Subjective</span>
+      <span class="arrow">➔</span>
+      <span class="slogan">Transjective musings on regenerative systems</span>
     </div>
-  </div>
-</footer>
+    <div class="footer-right">
+      <div class="footer-rotator">
+        <span class="bracket">[</span>
+        <div class="rotating-wrapper">
+          <div class="rotating-words">
+            <span class="active">Agriculture</span>
+            <span>Economy</span>
+            <span>Development</span>
+            <span>Design</span>
+            <span>Energy</span>
+            <span>Arts</span>
+            <span>Culture</span>
+            <span>Architecture</span>
+            <span>Tourism</span>
+            <span>Leadership</span>
+            <span>Healing</span>
+            <span>Education</span>
+            <span>Forestry</span>
+            <span>Landscapes</span>
+            <span>Cities</span>
+            <span>Finance</span>
+            <span>Business</span>
+            <span>Health</span>
+            <span>Justice</span>
+            <span>Tech</span>
+            <span>Governance</span>
+            <span>Storytelling</span>
+          </div>
+        </div>
+        <span class="bracket">]</span>
+      </div>
+    </div>
+  </footer>
 
-
+  <!-- Scripts al final para asegurar que el DOM esté listo -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <script type="module" src="assets/js/earth3d.js"></script>
   <script type="module" src="assets/js/script.js"></script>

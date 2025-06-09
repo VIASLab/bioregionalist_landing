@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const volution = document.getElementById('volution');
   const reContainer = document.getElementById('reContainer');
 
+
   if (
     !canvas || !cssStarfield || !mainInteractionZone ||
     !rFlipper || !eFlipper ||
@@ -70,3 +71,11 @@ document.addEventListener("DOMContentLoaded", () => {
     el.addEventListener('mouseleave', deactivateScene);
   });
 });
+
+import { initInfiniteFooterWords } from './footerWordsInfinite.js';
+
+document.addEventListener("DOMContentLoaded", () => {
+  // ... tu código existente ...
+  initInfiniteFooterWords(); // inicia el loop infinito
+});
+
