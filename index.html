@@ -12,6 +12,9 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
+<!--modal-->
+<link rel="stylesheet" href="assets/css/newsletterModal.css" />
+
 
   <!-- Estilos -->
   <link rel="stylesheet" href="assets/css/style.css" />
@@ -42,15 +45,13 @@
         </span>
       </div>
     </div>
-    <div class="newsletter-cta">
-      <svg
-        class="paper-plane"
-        viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <polygon points="10,50 90,50 50,10" fill="#f0ead6" />
-      </svg>
-    </div>
+<div id="newsletterTrigger" class="newsletter-modal">
+  <svg class="paper-plane" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+  </svg>
+</div>
+
+
   </header>
 
   <main class="scene">
@@ -129,9 +130,28 @@
     </div>
   </footer>
 
+<div id="newsletterModal" class="newsletter-modal">
+  <div class="modal-content">
+    <button id="closeModal" class="close-btn">&times;</button>
+    <h2>Subscribe to our newsletter</h2>
+    <form id="newsletterForm">
+      <input type="text" name="name" placeholder="Your name" required />
+      <input type="email" name="email" placeholder="Email address" required />
+      <label class="checkbox">
+        <input type="checkbox" name="updates" required />
+        <span>I agree to receive occasional updates</span>
+      </label>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</div>
+
+
   <!-- Scripts al final para asegurar que el DOM esté listo -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <script type="module" src="assets/js/earth3d.js"></script>
   <script type="module" src="assets/js/script.js"></script>
+  <script type="module" src="assets/js/newsletterModal.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,135 @@
+:root {
+  --modal-bg: rgba(20, 20, 20, 0.95);
+  --modal-border: rgba(255, 255, 255, 0.2);
+  --modal-radius: 12px;
+  --input-bg: #1a1a1a;
+  --input-text: #fff;
+  --accent-color: #68743d;
+}
+
+/* Overlay oscuro con transición y blur */
+#newsletterModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+#newsletterModal.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Contenedor del modal */
+.modal-content {
+  background: var(--modal-bg);
+  border: 1px solid var(--modal-border);
+  border-radius: var(--modal-radius);
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  color: #fff;
+  text-align: center;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+#newsletterModal.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-content h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="email"] {
+  width: 100%;
+  padding: 0.75em;
+  margin-bottom: 1em;
+  border: none;
+  border-radius: 6px;
+  background: var(--input-bg);
+  color: var(--input-text);
+}
+
+.modal-content .checkbox-label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  gap: 0.5em;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.modal-content input[type="checkbox"] {
+  accent-color: var(--accent-color);
+}
+
+.modal-content button {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 0.6em 1.2em;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.modal-content button:hover {
+  background: #df8433;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #aaa;
+  transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+  color: #fff;
+}
+
+/* SVG paper-plane animation */
+.paper-plane {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  fill: #f0ead6;
+  animation: pulsePlane 2s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.paper-plane:hover {
+  transform: scale(1.1) rotate(-10deg);
+  fill: #df8433;
+}
+
+@keyframes pulsePlane {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 1.5rem;
+  }
+}
