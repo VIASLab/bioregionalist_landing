@@ -196,7 +196,7 @@ p, li, .footer-left { font-weight: 400; }
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
-  gap: 3.5em;
+  gap: 3.9em;
   align-items: center;
   z-index: 5;
   pointer-events: none;
@@ -281,19 +281,27 @@ p, li, .footer-left { font-weight: 400; }
   line-height: 1.2;
 }
 
+.gen-hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+
 #volution {
   position: absolute;
   top: 50%;
   right: calc(50% + 480px);
   transform: translateY(-50%) scaleX(-1);
   font-size: var(--size-re-main);
-  color: var(--color-text);
-  transition: all 0.8s ease;
   display: flex;
+  color: var(--color-text);
   gap: 0.05em;
   z-index: 4;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
 #volution.to-left { opacity: 1; }
@@ -301,6 +309,31 @@ p, li, .footer-left { font-weight: 400; }
 #volution .mirror-letter {
   display: inline-block;
   transition: transform 0.6s ease;
+}
+#volution.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#volution.hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+
+#textGroupRight {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#textGroupRight.hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+#textGroupRight.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .site-footer {
@@ -397,18 +430,18 @@ p, li, .footer-left { font-weight: 400; }
 
 .footer-left .crossed {
   text-decoration: line-through;
-  color: #e86100;
+  color: #df8433;
   font-style: normal;
 }
 
 .footer-left .arrow {
-  color: #e86100;
+  color: #df8433;
   font-size: 1.2em;
   font-style: normal;
 }
 
 .footer-left .slogan {
-  color: white;
+  color: #d7ceb8;
   font-style: normal;
   font-weight: 400;
 }

@@ -105,6 +105,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // Utilidad para cambiar visibilidad de elementos
+  const toggleVisibility = (el, show) => {
+    el.classList.toggle('visible', show);
+    el.classList.toggle('hidden', !show);
+  };
+
+  // Estado inicial
+  textGroupRight.classList.remove('gen-hidden');
+  toggleVisibility(volution, false);
+
   let starfieldInstance = initStarfield(canvas);
   starfieldInstance?.setSpeed?.(0.0005);
 
@@ -115,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
     isActiveState = true;
 
     setRotationActive(true);
-
     starfieldInstance?.setSpeed(-0.015);
     cssStarfield.classList.add('is-active');
     canvas.classList.add('active');
@@ -124,13 +133,12 @@ document.addEventListener("DOMContentLoaded", () => {
     eFlipper.classList.add('is-flipped');
 
     textGroupRight.classList.add('gen-hidden');
-    volution.classList.add('to-left');
-    reContainer.classList.add('reverse-order');
+    toggleVisibility(volution, true);
 
+    reContainer.classList.add('reverse-order');
     earth3dElement.classList.add('is-pulsing');
     siteFooter.classList.add('is-hidden');
 
-    // Desactivar rotación después de 6 segundos
     clearTimeout(rotationTimeout);
     rotationTimeout = setTimeout(() => {
       deactivateScene();
@@ -142,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
     isActiveState = false;
 
     setRotationActive(false);
-
     starfieldInstance?.setSpeed(0.0005);
     cssStarfield.classList.remove('is-active');
     canvas.classList.remove('active');
@@ -151,9 +158,9 @@ document.addEventListener("DOMContentLoaded", () => {
     eFlipper.classList.remove('is-flipped');
 
     textGroupRight.classList.remove('gen-hidden');
-    volution.classList.remove('to-left');
-    reContainer.classList.remove('reverse-order');
+    toggleVisibility(volution, false);
 
+    reContainer.classList.remove('reverse-order');
     earth3dElement.classList.remove('is-pulsing');
     siteFooter.classList.remove('is-hidden');
   };
