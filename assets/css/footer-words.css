@@ -1,64 +1,139 @@
-/* 1) Footer container: quita paddings gigantes */
+/* === FOOTER WORDS: FINAL CLEANED VERSION === */
+
+/* Footer container */
 .site-footer {
   display: flex;
-  justify-content: space-between; /* Izquierda y derecha */
+  justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;                  /* Ajusta a tu gusto */
+  padding: 1.5rem 2rem;
+  flex-wrap: wrap;
+  pointer-events: none;
 }
 
-/* 2) Footer-right envuelto en un flex que centra horizontalmente */
+.footer-left {
+  flex: 1;
+  min-width: 200px;
+  max-width: 40vw;
+}
+
 .footer-right {
+  flex: 1;
   display: flex;
-  justify-content: center;
-  width: 15%;        /* O el ancho que necesites */
+  justify-content: flex-end;
+  min-width: 200px;
+  max-width: 40vw;
+  padding-right: 2rem;
+  margin-right: 1.5rem;
+  box-sizing: border-box;
 }
 
-/* 3) Footer-rotator junta corchetes + rotator */
 .footer-rotator {
   display: flex;
   align-items: center;
-  gap: 1em;        /* Ajusta espacio mínimo */
-}
-
-/* 4) Corchetes pegados al rotator */
-.bracket {
-  font-size: 2em;
-  line-height: 1;
-  color: #df8433ff;
-}
-
-/* 5) Wrapper mantiene tamaño fijo y oculta overflow */
-.rotating-wrapper {
-  height: 2em;      /* Altura de tus spans */
+  gap: 1.5em;
+  flex-shrink: 1;
   overflow: hidden;
+}
+
+.bracket {
+  font-size: 1.8em;
+  line-height: 1;
+  color: #df8433;
+  font-weight: normal;
+}
+
+.rotating-wrapper {
+  height: 2.5em;
+  min-width: 8em;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 6em;   /* Ancho mínimo para que no salte */
+  overflow: hidden;
+  border-radius: 2px;
+  text-align: center; 
+  position: relative;
 }
 
-/* 6) Palabras en columna con animación o transform translateY */
 .rotating-words {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* tu animación aquí, e.g.: */
-  animation: rotateWords 20s linear infinite; 
+  justify-content: center;
+  transition: transform 0.9s ease;
+  will-change: transform;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .rotating-words span {
-  height: 2em;
-  line-height: 1em;
+  /*position: absolute;*/
+  top: 10%;
+  left: 10%;
+  transform: translate(-10%, -1%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  line-height: 2.2em;
   white-space: nowrap;
-  opacity: 0.7;
-  filter: blur(0.5px);
-  transition: opacity .3s, filter .3s;
+  font-size: 0.95em;
+  opacity: 1;
+  filter: blur(0.2px);
   text-align: center;
+  color: rgba(104, 116, 61);
+  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
+
 .rotating-words span.active {
-  opacity: 0.5;
-  filter: none;
+  opacity: 1 !important;
+  filter: none !important;
   font-weight: 700;
-  color: #4caf50;
+  text-shadow: 0 0 1px rgba(255,255,255,0.2);
+  z-index: 2;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .footer-left,
+  .footer-right {
+    max-width: 100%;
+    min-width: unset;
+    width: 100%;
+  }
+
+  .footer-right {
+    justify-content: center;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .footer-rotator {
+    justify-content: center;
+  }
+
+  .rotating-wrapper {
+    min-width: 8em;
+    height: 2.2em;
+  }
+
+  .bracket {
+    font-size: 1.3em;
+  }
+
+  .rotating-words span {
+    font-size: 0.9em;
+  }
 }
