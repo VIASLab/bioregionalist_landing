@@ -86,8 +86,6 @@ import { initStarfield } from './canvasStarfield.js';
 import { setRotationActive } from './earth3d.js';
 import { initInfiniteFooterWords } from './footerWordsInfinite.js';
 
-let rotationTimeout = null;
-
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById('starCanvas');
   const cssStarfield = document.getElementById('cssStarfield');
@@ -105,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Utilidad para cambiar visibilidad de elementos
+  // Utilidad para alternar visibilidad
   const toggleVisibility = (el, show) => {
     el.classList.toggle('visible', show);
     el.classList.toggle('hidden', !show);
@@ -115,66 +113,74 @@ document.addEventListener("DOMContentLoaded", () => {
   textGroupRight.classList.remove('gen-hidden');
   toggleVisibility(volution, false);
 
-  let starfieldInstance = initStarfield(canvas);
+  const starfieldInstance = initStarfield(canvas);
   starfieldInstance?.setSpeed?.(0.0005);
 
-  let isActiveState = false;
+ let stopRightTimeout;
 
-  const activateScene = () => {
-    if (isActiveState) return;
-    isActiveState = true;
+const activateRight = () => {
+  clearTimeout(stopRightTimeout); // limpiar si había un tiempo previo
 
-    setRotationActive(true);
-    starfieldInstance?.setSpeed(-0.015);
-    cssStarfield.classList.add('is-active');
-    canvas.classList.add('active');
+  setRotationActive(true);
+  starfieldInstance?.setSpeed(-0.013); // velocidad rápida inicial
+  cssStarfield.classList.add('is-active');
+  canvas.classList.add('active');
 
-    rFlipper.classList.add('is-flipped');
-    eFlipper.classList.add('is-flipped');
+  rFlipper.classList.add('is-flipped');
+  eFlipper.classList.add('is-flipped');
 
-    textGroupRight.classList.add('gen-hidden');
-    toggleVisibility(volution, true);
+  textGroupRight.classList.add('gen-hidden');
+  toggleVisibility(volution, true);
 
-    reContainer.classList.add('reverse-order');
-    earth3dElement.classList.add('is-pulsing');
-    siteFooter.classList.add('is-hidden');
+  reContainer.classList.add('reverse-order');
+  earth3dElement.classList.add('is-pulsing');
+  siteFooter.classList.add('is-hidden');
 
-    clearTimeout(rotationTimeout);
-    rotationTimeout = setTimeout(() => {
-      deactivateScene();
-    }, 3000);
-  };
+  // Luego de 3 segundos, reducir la velocidad
+  stopRightTimeout = setTimeout(() => {
+    starfieldInstance?.setSpeed(-0.0006); // velocidad más suave
+  }, 3000);
+};
 
-  const deactivateScene = () => {
-    if (!isActiveState) return;
-    isActiveState = false;
+let stopLeftTimeout;
 
-    setRotationActive(false);
-    starfieldInstance?.setSpeed(0.0005);
-    cssStarfield.classList.remove('is-active');
-    canvas.classList.remove('active');
+const activateLeft = () => {
+  clearTimeout(stopLeftTimeout); // limpiar si había un tiempo previo
 
-    rFlipper.classList.remove('is-flipped');
-    eFlipper.classList.remove('is-flipped');
+  setRotationActive(false);
+  starfieldInstance?.setSpeed(0.013); // velocidad inicial positiva (izquierda)
+  cssStarfield.classList.remove('is-active');
+  canvas.classList.remove('active');
 
-    textGroupRight.classList.remove('gen-hidden');
-    toggleVisibility(volution, false);
+  rFlipper.classList.remove('is-flipped');
+  eFlipper.classList.remove('is-flipped');
 
-    reContainer.classList.remove('reverse-order');
-    earth3dElement.classList.remove('is-pulsing');
-    siteFooter.classList.remove('is-hidden');
-  };
+  textGroupRight.classList.remove('gen-hidden');
+  toggleVisibility(volution, false);
 
-  let previousSide = 'left';
+  reContainer.classList.remove('reverse-order');
+  earth3dElement.classList.remove('is-pulsing');
+  siteFooter.classList.remove('is-hidden');
+
+  // Luego de 3 segundos, desacelerar
+  stopLeftTimeout = setTimeout(() => {
+    starfieldInstance?.setSpeed(0.0006); // velocidad mínima
+  }, 3000);
+};
+
+
+  let previousSide = null;
   document.addEventListener('mousemove', (e) => {
     const half = window.innerWidth / 2;
     const currentSide = e.clientX > half ? 'right' : 'left';
+
     if (currentSide !== previousSide) {
       previousSide = currentSide;
+
       if (currentSide === 'right') {
-        activateScene();
+        activateRight();
       } else {
-        deactivateScene();
+        activateLeft();
       }
     }
   });

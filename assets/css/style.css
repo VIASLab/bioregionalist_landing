@@ -291,7 +291,7 @@ p, li, .footer-left { font-weight: 400; }
 #volution {
   position: absolute;
   top: 50%;
-  right: calc(50% + 480px);
+  right: calc(50% + 125px);
   transform: translateY(-50%) scaleX(-1);
   font-size: var(--size-re-main);
   display: flex;
@@ -303,8 +303,6 @@ p, li, .footer-left { font-weight: 400; }
   pointer-events: none;
   transition: opacity 0.6s ease, visibility 0.6s ease;
 }
-
-#volution.to-left { opacity: 1; }
 
 #volution .mirror-letter {
   display: inline-block;
