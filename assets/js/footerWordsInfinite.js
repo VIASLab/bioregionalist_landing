@@ -9,36 +9,47 @@ export function initInfiniteFooterWords({
   const originalWords = [...container.querySelectorAll('span')];
   const total = originalWords.length;
 
-  // Duplicar para el loop
+  // Duplicar palabras para bucle continuo
   originalWords.forEach(word => {
     const clone = word.cloneNode(true);
     container.appendChild(clone);
   });
 
   requestAnimationFrame(() => {
+    const allWords = container.querySelectorAll('span');
     const wordHeight = wrapper.offsetHeight;
+
     let index = 0;
+    let isResetting = false;
 
     const loop = () => {
-      if (index >= total) {
+      if (index >= total && !isResetting) {
+        isResetting = true;
         container.style.transition = 'none';
         container.style.transform = 'translateY(0)';
         index = 0;
-        void container.offsetWidth;
+
+        void container.offsetHeight;
+
+        requestAnimationFrame(() => {
+          container.style.transition = 'transform 0.5s ease';
+          container.style.transform = `translateY(-${wordHeight}px)`;
+          index = 1;
+          isResetting = false;
+        });
+        return;
       }
 
-      container.querySelectorAll('span').forEach((el, i) => {
+      allWords.forEach((el, i) => {
         el.classList.toggle('active', i === index);
       });
 
-      index++;
       container.style.transition = 'transform 0.5s ease';
       container.style.transform = `translateY(-${index * wordHeight}px)`;
+      index++;
     };
 
-    setInterval(loop, delay);
     loop();
+    setInterval(loop, delay);
   });
 }
-
-initInfiniteFooterWords();
