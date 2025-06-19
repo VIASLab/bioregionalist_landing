@@ -9,7 +9,6 @@ export function initInfiniteFooterWords({
   const originalWords = [...container.querySelectorAll('span')];
   const total = originalWords.length;
 
-  // Duplicar palabras para bucle continuo
   originalWords.forEach(word => {
     const clone = word.cloneNode(true);
     container.appendChild(clone);
@@ -17,8 +16,7 @@ export function initInfiniteFooterWords({
 
   requestAnimationFrame(() => {
     const allWords = container.querySelectorAll('span');
-    const wordHeight = wrapper.offsetHeight;
-
+    const wordHeight = allWords[0].offsetHeight;
     let index = 0;
     let isResetting = false;
 

@@ -40,16 +40,21 @@
 }
 
 .rotating-wrapper {
-  height: 2em;
+  height: 2em; /* clave para contener 1 palabra exacta */
   width: 10em;
   overflow: hidden;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
+
 .rotating-words {
+  position: absolute; /* asegura que solo una palabra se alinee centrada */
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,11 +67,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #4caf50;
+  color: #D7CEB8;
   font-weight: 600;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
 }
 
 .rotating-words span.active {
