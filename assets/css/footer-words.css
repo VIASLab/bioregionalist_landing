@@ -1,101 +1,121 @@
-/* === FOOTER WORDS: FINAL CLEANED VERSION === */
-
-/* Footer container */
 .site-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  flex-wrap: wrap;
-  pointer-events: none;
-}
-
-.footer-left {
-  flex: 1;
-  min-width: 200px;
-  max-width: 40vw;
-}
-
-.footer-right {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  min-width: 200px;
-  max-width: 40vw;
-  padding-right: 2rem;
-  margin-right: 1.5rem;
-  box-sizing: border-box;
-}
-
-.footer-rotator {
-  display: flex;
-  align-items: center;
-  gap: 1.5em;
-  flex-shrink: 1;
-  overflow: hidden;
-}
-
-.bracket {
-  font-size: 1.8em;
-  line-height: 1;
-  color: #df8433;
-  font-weight: normal;
-}
-
-.rotating-wrapper {
-  height: 2.5em;
-  min-width: 8em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 2px;
-  text-align: center; 
-  position: relative;
-}
-
-.rotating-words {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  transition: transform 0.9s ease;
-  will-change: transform;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1;
-}
-
-.rotating-words span {
-  /*position: absolute;*/
-  top: 10%;
-  left: 10%;
-  transform: translate(-10%, -1%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 2.2em;
-  line-height: 2.2em;
-  white-space: nowrap;
-  font-size: 0.95em;
-  opacity: 1;
-  filter: blur(0.2px);
-  text-align: center;
-  color: rgba(104, 116, 61);
-  transition: all 0.3s ease;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--color-text);
   pointer-events: none;
 }
 
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: center;
+}
+
+.footer-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  justify-content: center;
+}
+
+.footer-intro {
+  font-style: italic;
+  font-size: 1rem;
+  opacity: 0.85;
+  color: var(--color-text);
+}
+
+.bracket {
+  color: #df8433;
+  font-size: clamp(2.2rem, 2vw, 2rem);
+  animation: pulse 2s infinite;
+}
+
+.rotating-wrapper {
+  height: 6em; /* clave para contener 1 palabra exacta */
+  width: 10em;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rotating-words {
+  position: absolute; /* asegura que solo una palabra se alinee centrada */
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+
+.rotating-words span {
+  height: 2em;
+  line-height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #D7CEB8;
+  font-weight: 600;
+  filter: blur(2px);
+  opacity: 0.3;
+  transform: scale(1);
+  transition: all 0.4s ease;
+}
 
 .rotating-words span.active {
-  opacity: 1 !important;
-  filter: none !important;
+  filter: blur(0);
+  opacity: 1;
+  transform: scale(1.1);
   font-weight: 700;
-  text-shadow: 0 0 1px rgba(255,255,255,0.2);
-  z-index: 2;
 }
+
+.footer-credits {
+  font-size: 0.85rem;
+  color: #cccccc;
+  opacity: 0.3;
+}
+
+/* === CROSS LINE CUSTOM COLOR === */
+.footer-crossed {
+  color: #D7CEB8; /* color del texto */
+  text-decoration: line-through;
+  text-decoration-color: #df8433; /* línea naranja */
+  -webkit-text-decoration-color: #DF8433;
+  text-decoration-thickness: 1.4px;
+  font-style: normal;
+  position: relative;
+}
+.footer-crossed::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: #df8433;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.footer-crossed.animate::after {
+  transform: scaleX(1);
+}
+
+
+
+
 
 
 /* Responsive */
@@ -126,7 +146,7 @@
 
   .rotating-wrapper {
     min-width: 8em;
-    height: 2.2em;
+    height: 2em;
   }
 
   .bracket {
@@ -134,6 +154,23 @@
   }
 
   .rotating-words span {
-    font-size: 0.9em;
+    font-size: 0.95em;
   }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.08); }
+}
+
+@keyframes dash-reveal {
+  0% {
+    text-decoration-color: transparent;
+  }
+  100% {
+    text-decoration-color: #df8433;
+  }
+}
+
+.footer-crossed.animate {
+  animation: dash-reveal 2s ease-in-out forwards;
 }

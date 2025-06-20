@@ -139,6 +139,7 @@ const activateRight = () => {
   // Luego de 3 segundos, reducir la velocidad
   stopRightTimeout = setTimeout(() => {
     starfieldInstance?.setSpeed(-0.0006); // velocidad más suave
+    siteFooter.classList.remove('is-hidden'); // mostrar footer de nuevo
   }, 3000);
 };
 
@@ -160,11 +161,13 @@ const activateLeft = () => {
 
   reContainer.classList.remove('reverse-order');
   earth3dElement.classList.remove('is-pulsing');
-  siteFooter.classList.remove('is-hidden');
+  siteFooter.classList.add('is-hidden');
 
   // Luego de 3 segundos, desacelerar
   stopLeftTimeout = setTimeout(() => {
     starfieldInstance?.setSpeed(0.0006); // velocidad mínima
+      siteFooter.classList.remove('is-hidden'); // mostrar footer de nuevo
+
   }, 3000);
 };
 
@@ -184,6 +187,11 @@ const activateLeft = () => {
       }
     }
   });
+  // Animar línea cruzada al cargar
+  const crossed = document.querySelector('.footer-crossed');
+  if (crossed) {
+    setTimeout(() => crossed.classList.add('animate'), 100);
+  }
 
   initInfiniteFooterWords();
 });
