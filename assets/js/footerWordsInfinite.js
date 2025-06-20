@@ -17,6 +17,7 @@ export function initInfiniteFooterWords({
   requestAnimationFrame(() => {
     const allWords = container.querySelectorAll('span');
     const wordHeight = allWords[0].offsetHeight;
+    const centerOffset = (wrapper.offsetHeight / 2) - (wordHeight / 2); // <-- CORRECTO
     let index = 0;
     let isResetting = false;
 
@@ -24,14 +25,13 @@ export function initInfiniteFooterWords({
       if (index >= total && !isResetting) {
         isResetting = true;
         container.style.transition = 'none';
-        container.style.transform = 'translateY(0)';
+        container.style.transform = `translateY(${centerOffset}px)`;
         index = 0;
-
         void container.offsetHeight;
 
         requestAnimationFrame(() => {
-          container.style.transition = 'transform 0.5s ease';
-          container.style.transform = `translateY(-${wordHeight}px)`;
+          container.style.transition = 'transform 0.4s ease';
+          container.style.transform = `translateY(${-wordHeight + centerOffset}px)`;
           index = 1;
           isResetting = false;
         });
@@ -42,8 +42,8 @@ export function initInfiniteFooterWords({
         el.classList.toggle('active', i === index);
       });
 
-      container.style.transition = 'transform 0.5s ease';
-      container.style.transform = `translateY(-${index * wordHeight}px)`;
+      container.style.transition = 'transform 0.4s ease';
+      container.style.transform = `translateY(${-index * wordHeight + centerOffset}px)`;
       index++;
     };
 

@@ -426,11 +426,11 @@ p, li, .footer-left { font-weight: 400; }
   flex-wrap: wrap;
 }
 
-.footer-left .crossed {
+/*.footer-left .crossed {
   text-decoration: line-through;
   color: #df8433;
   font-style: normal;
-}
+}*/
 
 .footer-left .arrow {
   color: #df8433;

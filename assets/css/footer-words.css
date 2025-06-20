@@ -1,46 +1,45 @@
-/* === FOOTER WORDS: FINAL CLEANED VERSION (ALIGNED) === */
-
-/* Footer container */
 .site-footer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 1.5rem 2rem;
-  flex-wrap: wrap;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--color-text);
   pointer-events: none;
 }
 
-.footer-left {
-  flex: 1;
-  min-width: 200px;
-  max-width: 40vw;
-}
-
-.footer-right {
-  flex: 1;
+.footer-content {
   display: flex;
-  justify-content: flex-end;
-  min-width: 200px;
-  max-width: 40vw;
-  padding-right: 2rem;
-  margin-right: 1.5rem;
-  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: center;
 }
 
-.footer-rotator {
+.footer-line {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.5em;
-  font-size: 1.2rem;
+  justify-content: center;
+}
+
+.footer-intro {
+  font-style: italic;
+  font-size: 1rem;
+  opacity: 0.85;
+  color: var(--color-text);
 }
 
 .bracket {
   color: #df8433;
-  font-size: 1.5em;
+  font-size: clamp(2.2rem, 2vw, 2rem);
+  animation: pulse 2s infinite;
 }
 
 .rotating-wrapper {
-  height: 2em; /* clave para contener 1 palabra exacta */
+  height: 6em; /* clave para contener 1 palabra exacta */
   width: 10em;
   overflow: hidden;
   position: relative;
@@ -48,7 +47,6 @@
   align-items: center;
   justify-content: center;
 }
-
 
 .rotating-words {
   position: absolute; /* asegura que solo una palabra se alinee centrada */
@@ -58,7 +56,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.5s ease;
+  transition: all 0.4s ease;
 }
 
 .rotating-words span {
@@ -69,11 +67,55 @@
   align-items: center;
   color: #D7CEB8;
   font-weight: 600;
+  filter: blur(2px);
+  opacity: 0.3;
+  transform: scale(1);
+  transition: all 0.4s ease;
 }
 
 .rotating-words span.active {
+  filter: blur(0);
+  opacity: 1;
+  transform: scale(1.1);
   font-weight: 700;
 }
+
+.footer-credits {
+  font-size: 0.85rem;
+  color: #cccccc;
+  opacity: 0.3;
+}
+
+/* === CROSS LINE CUSTOM COLOR === */
+.footer-crossed {
+  color: #D7CEB8; /* color del texto */
+  text-decoration: line-through;
+  text-decoration-color: #df8433; /* línea naranja */
+  -webkit-text-decoration-color: #DF8433;
+  text-decoration-thickness: 1.4px;
+  font-style: normal;
+  position: relative;
+}
+.footer-crossed::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: #df8433;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.footer-crossed.animate::after {
+  transform: scaleX(1);
+}
+
+
+
+
 
 
 /* Responsive */
@@ -114,4 +156,21 @@
   .rotating-words span {
     font-size: 0.95em;
   }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.08); }
+}
+
+@keyframes dash-reveal {
+  0% {
+    text-decoration-color: transparent;
+  }
+  100% {
+    text-decoration-color: #df8433;
+  }
+}
+
+.footer-crossed.animate {
+  animation: dash-reveal 2s ease-in-out forwards;
 }
