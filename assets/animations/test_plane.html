@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Test - Lottie Trigger</title>
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+  <style>
+    body { margin: 0; height: 100vh; position: relative; }
+    .dotlottie-plane {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      width: 48px;
+      height: 48px;
+      z-index: 9999;
+      cursor: pointer;
+    }
+    #newsletterModal {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center; justify-content: center;
+    }
+    #newsletterModal.active { display: flex; }
+    .modal-content {
+      background: #222; padding: 2rem; border-radius: 8px; color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<dotlottie-player
+  id="paperPlaneAnim"
+  class="dotlottie-plane"
+  src="assets/animations/plane.json"
+  background="transparent"
+  speed="1"
+  autoplay
+  loop
+></dotlottie-player>
+
+<div id="newsletterModal">
+  <div class="modal-content">
+    <p>Hola mundo, modal abierto</p>
+    <button id="closeModal">Cerrar</button>
+  </div>
+</div>
+
+<script>
+  const trigger = document.getElementById("paperPlaneAnim");
+  const modal = document.getElementById("newsletterModal");
+  const closeBtn = document.getElementById("closeModal");
+
+  trigger.addEventListener("click", () => {
+    modal.classList.add("active");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("active");
+  });
+</script>
+
+</body>
+</html>

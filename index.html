@@ -46,9 +46,17 @@
       </div>
     </div>
 <div id="newsletterTrigger" class="newsletter-modal">
-  <svg class="paper-plane" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-  </svg>
+<dotlottie-player
+  id="paperPlaneAnim"
+  class="dotlottie-plane"
+  src="assets/animations/plane.json"
+  background="transparent"
+  speed="1"
+  autoplay
+  loop
+></dotlottie-player>
+
+
 </div>
 
 
@@ -89,7 +97,6 @@
         </div>
       </div>
     </div>
-  </main>
 
  <footer class="site-footer">
   <div class="footer-content">
@@ -133,6 +140,16 @@
 <div id="newsletterModal" class="newsletter-modal">
   <div class="modal-content">
     <button id="closeModal" class="close-btn">&times;</button>
+    
+<dotlottie-player
+  id="paperPlaneAnim"
+  class="dotlottie-plane"
+  src="assets/animations/plane.lottie"
+  background="transparent"
+  speed="1"
+  style="width: 48px; height: 48px"
+></dotlottie-player>
+
     <h2>Subscribe to our newsletter</h2>
     <form id="newsletterForm">
       <input type="text" name="name" placeholder="Your name" required />
@@ -152,6 +169,9 @@
   <script type="module" src="assets/js/earth3d.js"></script>
   <script type="module" src="assets/js/script.js"></script>
   <script type="module" src="assets/js/newsletterModal.js"></script>
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+<script type="module" src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"></script>
+
 
 </body>
 </html>
