@@ -32,6 +32,14 @@
   pointer-events: auto;
 }
 
+#newsletterTrigger {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1001;
+}
+
+
 /* Contenedor del modal */
 .modal-content {
   background: var(--modal-bg);
@@ -109,19 +117,7 @@
 }
 
 /* SVG paper-plane animation */
-.paper-plane {
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  fill: #f0ead6;
-  animation: pulsePlane 2s ease-in-out infinite;
-  transition: transform 0.3s ease;
-}
 
-.paper-plane:hover {
-  transform: scale(1.1) rotate(-10deg);
-  fill: #df8433;
-}
 
 @keyframes pulsePlane {
   0%, 100% { transform: translateY(0); }
@@ -133,3 +129,60 @@
     padding: 1.5rem;
   }
 }
+@keyframes flyIn {
+  0% { transform: translateX(-100%) rotate(0); opacity: 0; }
+  100% { transform: translateX(0) rotate(0); opacity: 1; }
+}
+
+
+.dotlottie-plane {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 48px;
+  height: 48px;
+  z-index: 1001;
+  cursor: pointer;
+  display: block;
+  opacity: 1;
+  transition: transform 0.3s ease;
+}
+.dotlottie-plane.static {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 48px;
+  height: 48px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+
+.dotlottie-plane:hover {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.dotlottie-plane.idle {
+  animation: idleFloat 3s ease-in-out infinite;
+}
+
+@keyframes idleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .dotlottie-plane {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+
+
+

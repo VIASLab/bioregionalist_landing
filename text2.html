@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Newsletter Modal</title>
+  <style>
+    :root {
+      --modal-bg: rgba(20, 20, 20, 0.95);
+      --modal-border: rgba(255, 255, 255, 0.2);
+      --modal-radius: 12px;
+      --input-bg: #1a1a1a;
+      --input-text: #fff;
+      --accent-color: #68743d;
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #101010;
+      color: white;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #newsletterModal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    #newsletterModal.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: var(--modal-bg);
+      border: 1px solid var(--modal-border);
+      border-radius: var(--modal-radius);
+      padding: 2rem;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    #newsletterModal.active .modal-content {
+      transform: scale(1);
+    }
+
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 0.75em;
+      margin-bottom: 1em;
+      border: none;
+      border-radius: 6px;
+      background: var(--input-bg);
+      color: var(--input-text);
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--accent-color);
+    }
+
+    button {
+      background: var(--accent-color);
+      color: #fff;
+      border: none;
+      padding: 0.6em 1.2em;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      color: #aaa;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: #fff;
+    }
+
+    #paperPlaneAnim {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1rem;
+      animation: flyIn 0.6s ease-out;
+    }
+
+    @keyframes flyIn {
+      0% { transform: translateX(-100%) rotate(0); opacity: 0; }
+      100% { transform: translateX(0) rotate(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <button id="newsletterTrigger">Subscribe</button>
+
+  <div id="newsletterModal">
+    <div class="modal-content">
+      <div id="paperPlaneAnim"></div>
+      <span class="modal-close" id="closeModal">&times;</span>
+      <h2>Subscribe to our newsletter</h2>
+      <form id="newsletterForm">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Your email" required />
+        <label class="checkbox-label">
+          <input type="checkbox" name="updates" />
+          Receive updates
+        </label>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lottie-web@5.12.0/build/player/lottie.min.js"></script>
+  <script>
+    const modal = document.getElementById("newsletterModal");
+    const trigger = document.getElementById("newsletterTrigger");
+    const closeBtn = document.getElementById("closeModal");
+    const form = document.getElementById("newsletterForm");
+    const planeContainer = document.getElementById("paperPlaneAnim");
+
+    let planeAnimation = lottie.loadAnimation({
+      container: planeContainer,
+      renderer: "svg",
+      loop: true,
+      autoplay: false,
+      path: "https://lottie.host/0ba0998e-65cd-4dc7-b542-1cdd28ff8dc1/rOzjFG6z8O.json"
+    });
+
+    trigger.addEventListener("click", () => {
+      modal.classList.add("active");
+      setTimeout(() => planeAnimation.play(), 300);
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+      planeAnimation.stop();
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      planeContainer.style.transform = "translateX(120%) rotate(-30deg)";
+      planeContainer.style.transition = "transform 0.6s ease";
+
+      setTimeout(() => {
+        modal.classList.remove("active");
+        planeContainer.style.transform = "none";
+        planeAnimation.stop();
+        alert("Thank you for subscribing!");
+        form.reset();
+      }, 700);
+    });
+  </script>
+</body>
+</html>
