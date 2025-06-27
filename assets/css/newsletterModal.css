@@ -136,32 +136,49 @@
 
 
 .dotlottie-plane {
-  position: fixed; /* más seguro que absolute si el body tiene transform o overflow */
-  top: 1.2rem;
-  right: 1.2rem;
-  width: 40px;
-  height: 40px;
-  z-index: 1100; /* más alto que el modal (1000) y el trigger (1001) */
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 48px;
+  height: 48px;
+  z-index: 1001;
   cursor: pointer;
   display: block;
   opacity: 1;
   transition: transform 0.3s ease;
-  pointer-events: auto;
+}
+.dotlottie-plane.static {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 48px;
+  height: 48px;
+  z-index: 1000;
+  cursor: pointer;
 }
 
 
 .dotlottie-plane:hover {
-  transform: scale(1.1) rotate(-8deg);
+  transform: scale(1.1) rotate(-5deg);
 }
 
+.dotlottie-plane.idle {
+  animation: idleFloat 3s ease-in-out infinite;
+}
 
+@keyframes idleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
 
 @media (max-width: 480px) {
   .dotlottie-plane {
-    width: 32px;
-    height: 32px;
-    top: 0.8rem;
-    right: 0.8rem;
+    width: 40px;
+    height: 40px;
   }
 }
 

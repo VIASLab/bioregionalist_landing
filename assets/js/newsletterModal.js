@@ -1,9 +1,25 @@
 const modal = document.getElementById("newsletterModal");
-const trigger = document.getElementById("paperPlaneAnim"); // Trigger es el avión
+const plane = document.getElementById("paperPlaneAnim");
+const planeStatic = document.getElementById("planeStatic");
 const closeBtn = document.getElementById("closeModal");
 const form = document.getElementById("newsletterForm");
 
-trigger.addEventListener("click", () => {
+let loopCount = 0;
+let maxLoops = 3;
+
+plane.addEventListener("ready", () => {
+  plane.play();
+});
+
+plane.addEventListener("loop", () => {
+  loopCount++;
+  if (loopCount >= maxLoops) {
+    plane.style.display = "none";
+    planeStatic.style.display = "block";
+  }
+});
+
+planeStatic.addEventListener("click", () => {
   modal.classList.add("active");
 });
 
@@ -22,3 +38,8 @@ form.addEventListener("submit", (e) => {
   alert("Thank you for subscribing!");
   form.reset();
 });
+
+
+
+
+
