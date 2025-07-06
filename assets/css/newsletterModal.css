@@ -19,11 +19,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9999;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.4s ease, visibility 0.4s ease;
+  inset: 0;
 }
 
 #newsletterModal.active {
@@ -87,7 +88,7 @@
   accent-color: var(--accent-color);
 }
 
-.modal-content button {
+.modal-content form button {
   background: var(--accent-color);
   color: #fff;
   border: none;
@@ -104,17 +105,24 @@
 
 .modal-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.2rem;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1rem;             /* Tamaño de la X más pequeño */
+  color: rgba(255, 255, 255, 0.4); /* Más tenue */
   cursor: pointer;
-  color: #aaa;
-  transition: color 0.3s ease;
+  padding: 0.01rem;             /* Botón más compacto */
+  line-height: 1;
+  border-radius: 4px;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .modal-close:hover {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.2);
 }
+
 
 /* SVG paper-plane animation */
 
@@ -139,22 +147,24 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  width: 48px;
-  height: 48px;
+  width: 120px;
+  height: 120px;
   z-index: 1001;
   cursor: pointer;
   display: block;
   opacity: 1;
   transition: transform 0.3s ease;
+  pointer-events: auto;
 }
 .dotlottie-plane.static {
+  width: 150px;
+  height: 150px;
   position: absolute;
   top: 1rem;
   right: 1rem;
-  width: 48px;
-  height: 48px;
-  z-index: 1000;
   cursor: pointer;
+  z-index: 1001;
+  animation: idleFloat 3s ease-in-out infinite;
 }
 
 
@@ -167,18 +177,14 @@
 }
 
 @keyframes idleFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
 @media (max-width: 480px) {
   .dotlottie-plane {
-    width: 40px;
-    height: 40px;
+    width: 64px;
+    height: 64px;
   }
 }
 
