@@ -1,3 +1,8 @@
+:root {
+  --color-text: #D7CEB8;
+  --accent-color: #df8433;
+}
+
 .site-footer {
   display: flex;
   flex-direction: column;
@@ -20,22 +25,57 @@
 .footer-line {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 0.3em;
-  justify-content: center;
+  position: relative;
   font-size: 1rem;
 }
 
+.footer-crossed {
+  color: var(--color-text);
+  font-style: italic;
+  position: relative;
+  white-space: nowrap;
+}
 
+.footer-crossed::after {
+  content: "";
+  position: absolute;
+  top: 58%;
+  left: 0;
+  right: -0.9rem; /* Se une a la flecha */
+  height: 2px;
+  background-color: var(--accent-color);
+  transform: translateY(-55%);
+  z-index: 1;
+}
+
+.footer-arrow {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  position: relative;
+  z-index: 2;
+  margin-left: -0.1rem;
+  margin-right: 0.5rem;
+}
+
+.footer-slogan {
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-text);
+  opacity: 0.95;
+  white-space: nowrap;
+}
 
 .bracket {
-  color: #df8433;
+  color: var(--accent-color);
   font-size: clamp(2.2rem, 2vw, 2rem);
   animation: pulse 2s infinite;
 }
 
 .rotating-wrapper {
-  height: 6em; /* clave para contener 1 palabra exacta */
+  height: 6em;
   width: 10em;
   overflow: hidden;
   position: relative;
@@ -45,7 +85,7 @@
 }
 
 .rotating-words {
-  position: absolute; /* asegura que solo una palabra se alinee centrada */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -61,7 +101,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #D7CEB8;
+  color: var(--color-text);
   font-weight: 600;
   filter: blur(2px);
   opacity: 0.3;
@@ -74,6 +114,7 @@
   opacity: 1;
   transform: scale(1.1);
   font-weight: 700;
+  z-index: 1;
 }
 
 .footer-credits {
@@ -82,67 +123,22 @@
   opacity: 0.3;
 }
 
-/* === CROSS LINE CUSTOM COLOR === */
-.footer-crossed {
-  color: #D7CEB8; /* color del texto */
-  text-decoration: line-through;
-  text-decoration-color: #df8433; /* línea naranja */
-  -webkit-text-decoration-color: #DF8433;
-  text-decoration-thickness: 1.4px;
-  font-style: normal;
-  position: relative;
-}
-.footer-crossed::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 100%;
-  height: 1px;
-  background-color: #df8433;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s ease;
+/* Animaciones */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.08); }
 }
 
-.footer-crossed.animate::after {
-  transform: scaleX(1);
-}
-
-.footer-arrow {
-  color: #df8433;
-  margin: 0 0.3em;
-}
-
-
-
-
-
-
-/* Responsive */
 @media (max-width: 768px) {
   .site-footer {
-    flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
     padding: 1rem 1.5rem;
+    gap: 1rem;
   }
 
-  .footer-left,
-  .footer-right {
-    max-width: 100%;
-    min-width: unset;
-    width: 100%;
-  }
-
-  .footer-right {
-    justify-content: center;
-    margin-right: 0;
-    padding-right: 0;
-  }
-
-  .footer-rotator {
-    justify-content: center;
+  .footer-line {
+    flex-direction: column;
+    text-align: center;
   }
 
   .rotating-wrapper {
@@ -157,21 +153,4 @@
   .rotating-words span {
     font-size: 0.95em;
   }
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.08); }
-}
-
-@keyframes dash-reveal {
-  0% {
-    text-decoration-color: transparent;
-  }
-  100% {
-    text-decoration-color: #df8433;
-  }
-}
-
-.footer-crossed.animate {
-  animation: dash-reveal 2s ease-in-out forwards;
 }

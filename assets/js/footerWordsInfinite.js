@@ -7,47 +7,46 @@ export function initInfiniteFooterWords({
 
   const wrapper = container.parentElement;
   const originalWords = [...container.querySelectorAll('span')];
-  const total = originalWords.length;
+  const wordHeight = originalWords[0].offsetHeight;
+  const centerOffset = (wrapper.offsetHeight / 2) - (wordHeight / 2);
 
+  // Clonar palabras para efecto continuo
   originalWords.forEach(word => {
     const clone = word.cloneNode(true);
     container.appendChild(clone);
   });
 
-  requestAnimationFrame(() => {
-    const allWords = container.querySelectorAll('span');
-    const wordHeight = allWords[0].offsetHeight;
-    const centerOffset = (wrapper.offsetHeight / 2) - (wordHeight / 2); // <-- CORRECTO
-    let index = 0;
-    let isResetting = false;
+  const allWords = [...container.querySelectorAll('span')];
+  const totalWords = originalWords.length;
 
-    const loop = () => {
-      if (index >= total && !isResetting) {
-        isResetting = true;
+  let index = 0;
+
+  const loop = () => {
+    // Marcar palabra activa
+    allWords.forEach((el, i) => {
+      el.classList.toggle('active', i === index);
+    });
+
+    // Mover a la siguiente palabra
+    container.style.transition = 'transform 0.4s ease';
+    container.style.transform = `translateY(${-index * wordHeight + centerOffset}px)`;
+
+    index++;
+
+    // Reset sin parpadeo
+    if (index >= totalWords) {
+      setTimeout(() => {
         container.style.transition = 'none';
         container.style.transform = `translateY(${centerOffset}px)`;
         index = 0;
-        void container.offsetHeight;
 
-        requestAnimationFrame(() => {
-          container.style.transition = 'transform 0.4s ease';
-          container.style.transform = `translateY(${-wordHeight + centerOffset}px)`;
-          index = 1;
-          isResetting = false;
+        // Volver a aplicar active en el primer ítem
+        allWords.forEach((el, i) => {
+          el.classList.toggle('active', i === 0);
         });
-        return;
-      }
+      }, delay);
+    }
+  };
 
-      allWords.forEach((el, i) => {
-        el.classList.toggle('active', i === index);
-      });
-
-      container.style.transition = 'transform 0.4s ease';
-      container.style.transform = `translateY(${-index * wordHeight + centerOffset}px)`;
-      index++;
-    };
-
-    loop();
-    setInterval(loop, delay);
-  });
+  setInterval(loop, delay);
 }
